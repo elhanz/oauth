@@ -1,21 +1,32 @@
 server:
-  port: 8083
+  port: 8081
+
+keycloak:
+
+  auth-server-url: http://localhost:8180/auth
+  realm: todoapp-realm
+  resource: todoapp-client
+  public-client: true
+  bearer-only: true
 
 spring:
   jpa:
     database: POSTGRESQL
+    generate-ddl: true
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
+      spring:
   datasource:
-    platform: postgres
-    url: jdbc:postgresql://localhost:5432/myoauth2
-    username: djamware
-    password: dj@mw@r3
-    driver-class-name: org.postgresql.Driver
+      driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://localhost:5432/check
+      username: postgres
+      password: 4444
+      hikari:
+      initialization-fail-timeout: 0
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/djamware
-          jwk-set-uri: http://localhost:8080/realms/djamware/protocol/openid-connect/certs
+          issuer-uri: http://localhost:8180/realms/todoapp-realm
+          jwk-set-uri: http://localhost:8180/realms/todoapp-realm/protocol/openid-connect/certs

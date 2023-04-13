@@ -4,16 +4,18 @@ import com.djamware.oauthresource.entity.Board;
 import com.djamware.oauthresource.repository.IBoardRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-public class BoardServiceImpl implements IBoardService {
+public class BoardService {
     private final IBoardRepository boardRepository;
 
-    public BoardServiceImpl(IBoardRepository boardRepository) {
+    public BoardService(IBoardRepository boardRepository) {
         this.boardRepository = boardRepository;
     }
 
-    @Override
-    public Iterable<Board> findAll() {
+    public List<Board> findAll() {
         return boardRepository.findAll();
     }
+
 }
